@@ -13,7 +13,6 @@ interface ContextData {
 }
 
 interface userDataSchema {
-  name: string;
   email: string;
   password: string;
 }
@@ -30,17 +29,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   // Função para logar na aplicação, recebe os dados pegos do form de login
   const signIn = (userData: userDataSchema) => {
-    axios
-      .post("https://kenziehub.herokuapp.com/sessions", userData)
-      .then((response) => {
-        // setamos no localStorage o token, caso tenhamos a resposta esperada
-        localStorage.setItem("token", response.data.token);
-        // setamos no state o token, caso tenhamos a resposta esperada
-        setAuthToken(response.data.token);
-        // redirecionamos para a página logado
-        history.push("/dashboard");
-      })
-      .catch((err) => console.log(err));
+    console.log("Logando com", userData);
+    // axios
+    //   .post("https://kenziehub.herokuapp.com/sessions", userData)
+    //   .then((response) => {
+    //     // setamos no localStorage o token, caso tenhamos a resposta esperada
+    //     localStorage.setItem("token", response.data.token);
+    //     // setamos no state o token, caso tenhamos a resposta esperada
+    //     setAuthToken(response.data.token);
+    //     // redirecionamos para a página logado
+    //     history.push("/dashboard");
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   // Função para deslogar da aplicação
