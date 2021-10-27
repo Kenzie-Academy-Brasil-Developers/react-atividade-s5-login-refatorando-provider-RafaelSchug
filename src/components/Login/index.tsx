@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "../../providers/Auth";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 interface dataSchema {
   email: string;
@@ -20,13 +22,19 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const { signIn } = useAuth();
+  const { signIn, authToken } = useAuth();
 
   const onSubmit = (data: dataSchema) => {
     signIn(data);
   };
 
-  console.log(errors);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") || authToken) {
+      history.push("/dashboard");
+    }
+  }, [authToken]);
 
   return (
     <div>
