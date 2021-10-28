@@ -11,7 +11,7 @@ const Routes = () => {
       <Route path="/dashboard">
         <Dashboard></Dashboard>
       </Route>
-      {/* <Route>{() => history.push("/")}</Route> */}
+      <Route>{() => history.push("/")}</Route>
     </Switch>
   );
 };

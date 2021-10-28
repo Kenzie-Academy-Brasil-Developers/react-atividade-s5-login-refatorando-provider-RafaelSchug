@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useAuth } from "../../providers/Auth";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import './style.css';
+import "./style.css";
 
 interface dataSchema {
   email: string;
@@ -38,14 +38,21 @@ const Login = () => {
   }, [authToken]);
 
   return (
-    <div className='login__container'>
+    <div className="login__container">
       <h4>Login</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="">{errors.email?.message}</label>
-        <input type="text" {...register("email")} placeholder="Email" autoFocus />
+        <input
+          type="text"
+          {...register("email")}
+          placeholder="Email"
+          autoFocus
+        />
         <label htmlFor="">{errors.password?.message}</label>
         <input type="password" {...register("password")} placeholder="Senha" />
-        <button type="submit" className='login'>Login</button>
+        <button type="submit" className="login">
+          Login
+        </button>
         <span>{requestLog}</span>
       </form>
     </div>
