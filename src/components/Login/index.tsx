@@ -42,7 +42,7 @@ const Login = () => {
       <h4>Login</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="">{errors.email?.message}</label>
-        <input type="text" {...register("email")} placeholder="Email" />
+        <input type="text" {...register("email")} placeholder="Email" autoFocus />
         <label htmlFor="">{errors.password?.message}</label>
         <input type="password" {...register("password")} placeholder="Senha" />
         <button type="submit" className='login'>Login</button>
