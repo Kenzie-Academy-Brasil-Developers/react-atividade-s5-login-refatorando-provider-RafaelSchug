@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 interface AuthProviderProps {
@@ -21,7 +21,9 @@ interface ContextData {
 const AuthContext = createContext<ContextData>({} as ContextData);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  // const history = useHistory();
+
+
+  const history = useHistory();
 
   const [requestLog, setRequestLog] = useState<string>('');
 
@@ -37,8 +39,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         localStorage.setItem("token", response.data.token);
         setAuthToken(response.data.token);
         localStorage.setItem('@userName', response.data.user.name);
-        // history.push("/dashboard");
+        history.push("/dashboard");
         console.log(response);
+        setRequestLog('');
       })
       .catch((err) => {
         console.log(err);
@@ -50,11 +53,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     localStorage.clear();
     setAuthToken("");
     setRequestLog("");
-    // history.push("/login");
+    history.push("/");
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, logout, signIn, requestLog }}>
+    <AuthContext.Provider value={{ authToken, logout, signIn, requestLog}}>
       {children}
     </AuthContext.Provider>
   );
