@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { useAuth } from "../../providers/Auth";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import './style.css';
 
 interface dataSchema {
   email: string;
@@ -22,7 +23,7 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const { signIn, authToken } = useAuth();
+  const { signIn, authToken, requestLog } = useAuth();
 
   const onSubmit = (data: dataSchema) => {
     signIn(data);
@@ -37,11 +38,15 @@ const Login = () => {
   }, [authToken]);
 
   return (
-    <div>
+    <div className='login__container'>
+      <h4>Login</h4>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="">{errors.email?.message}</label>
         <input type="text" {...register("email")} placeholder="Email" />
-        <input type="text" {...register("password")} placeholder="Senha" />
-        <button type="submit">Login</button>
+        <label htmlFor="">{errors.password?.message}</label>
+        <input type="password" {...register("password")} placeholder="Senha" />
+        <button type="submit" className='login'>Login</button>
+        <span>{requestLog}</span>
       </form>
     </div>
   );
